@@ -9,7 +9,7 @@ from proxy.http.proxy import HttpProxyBasePlugin
 from proxy.http.methods import httpMethods
 from typing import Optional
 
-class TorrentLeechPlugin(HttpProxyBasePlugin):
+class TrackerRequestRewritePlugin(HttpProxyBasePlugin):
     """Modify tracker GET request to report different upload data."""
 
     def before_upstream_connection(
@@ -40,7 +40,7 @@ class TorrentLeechPlugin(HttpProxyBasePlugin):
 if __name__ == '__main__':
     proxy.main([
         '--log-level', 'd',
-        '--plugins', '__main__.TorrentLeechPlugin',
+        '--plugins', '__main__.TrackerRequestRewritePlugin',
         '--ca-key-file', '/Users/imagi/ca-key.pem',
         '--ca-cert-file', '/Users/imagi/ca-cert.pem',
         '--ca-signing-key-file', '/Users/imagi/ca-signing-key.pem'

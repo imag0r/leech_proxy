@@ -2,6 +2,7 @@
 
 import proxy
 import re
+import ipaddress
 
 from proxy.common.utils import bytes_, text_
 from proxy.http.parser import HttpParser
@@ -38,10 +39,11 @@ class TrackerRequestRewritePlugin(HttpProxyBasePlugin):
         pass
 
 if __name__ == '__main__':
-    proxy.main([
-        '--log-level', 'd',
-        '--plugins', '__main__.TrackerRequestRewritePlugin',
-        '--ca-key-file', '/Users/imagi/ca-key.pem',
-        '--ca-cert-file', '/Users/imagi/ca-cert.pem',
-        '--ca-signing-key-file', '/Users/imagi/ca-signing-key.pem'
-    ])
+    proxy.main(
+        hostname = ipaddress.IPv4Address('127.0.0.1'),
+        plugins = ['__main__.TorrentLeechPlugin'],
+        ca_key_file = '/Users/imagi/ca-key.pem',
+        ca_cert_file = '/Users/imagi/ca-cert.pem',
+        ca_signing_key_file = '/Users/imagi/ca-signing-key.pem',
+        ca_file = '/Users/imagi/cacert.pem',
+    )   
